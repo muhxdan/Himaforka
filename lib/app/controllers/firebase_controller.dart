@@ -4,8 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:get/get.dart';
-import 'package:himaforka/app/modules/main/views/main_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../routes/app_pages.dart';
 
 class FirebaseController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -35,15 +36,16 @@ class FirebaseController extends GetxController {
   Future<void> signIn(String email, String password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
-      Get.snackbar("Login berhasil", "Selamat datang",
-          snackPosition: SnackPosition.BOTTOM);
-      Get.offAll(
-        const MainView(),
-        duration: const Duration(
-          milliseconds: 500,
-        ),
-        transition: Transition.downToUp,
-      );
+      Get.toNamed(Routes.MAIN);
+      // Get.snackbar("Login berhasil", "Selamat datang",
+      //     snackPosition: SnackPosition.BOTTOM);
+      // Get.offAll(
+      //   const MainView(),
+      //   duration: const Duration(
+      //     milliseconds: 500,
+      //   ),
+      //   transition: Transition.downToUp,
+      // );
     } on FirebaseAuthException catch (ex) {
       if (ex.code == "user-not-found") {
         Get.snackbar("Error", "Pengguna tidak ditemukan",

@@ -25,7 +25,7 @@ class MainView extends GetView<MainController> {
           children: [
             (!Responsive.isDesktop(context))
                 ? AppBarMobile(
-                    // scaffoldKEY: controller.scaffoldKey,
+                    scaffoldKEY: controller.scaffoldKey,
                     controller: controller,
                   )
                 : Container(),
